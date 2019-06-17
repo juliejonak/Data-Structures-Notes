@@ -12,6 +12,8 @@ In interviews, it's common to be asked about more niche implementations of data 
 
 ## Linked Lists
 
+Sean Chen Lecture: https://youtu.be/wjeheracQ6U
+
 Linked Lists and Arrays are very similar - both are used for storing lists of data. Arrays are usually included as part of any language's library but linked lists are not necessarily (JS and Python do not export a standard linked list implementation), so we are more familiar with arrays. We see them commonly.
 
 With arrays, the information stored within them are all physicaly stored next to each other in memory.
@@ -155,15 +157,37 @@ To adjust our constructor for handling this, we can keep our current setup but w
 
 ```
         # check if we're in an empty list state
-        # can also write: if not head and not tail
+        # can also write: if not self.head and not self.tail
         if self.head == None and self.tail == None:
             # set the list's head reference to point to new_node
             self.head = new_node
-            
+
             # set the list's tail reference to point to new_node
             self.tail = new_node
 ```
 
+Now our Linked List class will look like this with the If/Else setup handling this edge case:
+
+```
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def add_to_tail(self, value):
+        new_node = Node(value)
+
+        if self.head == None and self.tail == None:
+            self.head = new_node
+            self.tail = new_node
+
+        else:
+            self.tail.set_next(new_node)
+            self.tail = new_node
+
+```
+
+1:14:06 https://www.youtube.com/watch?feature=youtu.be&v=wjeheracQ6U&app=desktop
 
 
 
