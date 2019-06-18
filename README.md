@@ -187,10 +187,95 @@ class LinkedList:
 
 ```
 
-1:14:06 https://www.youtube.com/watch?feature=youtu.be&v=wjeheracQ6U&app=desktop
+Now let's add a remove head method. We need to take the old_head's value, and update it to the next_node, then remove that node.
+
+```
+        def remove_head(self):
+            # Store reference to node being removed to return value
+            old_head = self.head
+            # update head reference to refer to the old head's next_node
+            self.head = old_head.get_next()
+            # return the old head's value
+            return old_head.get_value()
+```
+
+A double linked list would imply that the flow of pointers goes in both directions. Currently, they only go one way, with each node pointing to the next one, but not the previous one.
+
+```
+H -> x -> x -> x -> T
+```
+
+A linked list where the nodes point to both the previous _and_ next node, then that is a doubly linked list, like so:
+
+```
+H <-> x <-> x <-> x <-> T
+```
+
+Hash Tables and Caches are times where linked lists might be preferred over arrays...but that comes later.
+
+- What if our list is empty? We need to return non to show we can't remove the head.
+
+We'll check and return None if that is the case.
+
+
+- What if our list has only one Node?
+
+Then the self.head will equal self.tail, because the head reference and tail reference will be to the same node.
+
+We'll set our reference to the old_head and then update the current head and tail to None, since removing this single Node would mean there is no node left (empty list)
+
+```
+            # what if our list is empty?
+            if not self.head and not self.tail:
+                return None
+            # what if our list only contains a single node?
+            if self.head is self.tail:
+                old_head = self.head
+                self.head = None
+                self.tail = None
+                return old_head.get_value()
+```
 
 
 
+#### How can we iterate through a linked list, looking for a target value?
+
+First, let's check if our list is empty. There's no reason to search through our list if it contains nothing.
+
+```
+    def contains(self, target):
+        # what if our list is empty?
+        if not self.head and not self.tail:
+            return False
+        # get the current reference that initially starts at the head of the list
+        current = self.head
+        # keep looping while curent is valid (not None)
+        while current:
+            # check if current.get_value() is the same as our target
+            if current.get_value() == target:
+                return True
+            # otherwise, update current to the next node
+            else:
+                current = current.get_next()
+        # otherwise we didn't find it in the linked list so return false
+        return False
+```
+
+If our list is like this:
+
+```
+1 --> 2 --> 3 --> 4 --> N
+```
+
+We have to start at the head because with a single Linked List, we can only traverse it in one direction.
+
+Does this linked list contain 3?
+
+We keep looping so long as there is a Node to check against the Target (3).
+
+When it checks Node 1, and 1 != 3, Current become Node 2. It continues to iterate through until it hits Node 3 and return True because 3 == 3.
+
+If we were looking for 5, this would iterate through the entire linked list until the final Node is None (end of the list) and no target matched, so it returns False.
 
 
 

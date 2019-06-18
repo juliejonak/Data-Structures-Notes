@@ -39,4 +39,38 @@ class LinkedList:
             # update the linked list's 'tail' reference
             self.tail = new_node
 
+    def remove_head(self):
+        # what if our list is empty?
+        if not self.head and not self.tail:
+            return None
+        # what if our list only contains a single node?
+        if self.head is self.tail:
+            old_head = self.head
+            self.head = None
+            self.tail = None
+            return old_head.get_value()
+        # Store reference to node being removed to return value
+        old_head = self.head
+        # update head reference to refer to the old head's next_node
+        self.head = old_head.get_next()
+        # return the old head's value
+        return old_head.get_value()
+
+    def contains(self, target):
+        # what if our list is empty?
+        if not self.head and not self.tail:
+            return False
+        # get the current reference that initially starts at the head of the list
+        current = self.head
+        # keep looping while curent is valid (not None)
+        while current:
+            # check if current.get_value() is the same as our target
+            if current.get_value() == target:
+                return True
+            # otherwise, update current to the next node
+            else:
+                current = current.get_next()
+        # otherwise we didn't find it in the linked list so return false
+        return False
+
 
