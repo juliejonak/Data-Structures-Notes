@@ -14,7 +14,7 @@ i. [Iterating Through a Linked List](#Iterating-Through-a-Linked-List)
 
 [CS18 Sean Chen Lecture](https://youtu.be/wjeheracQ6U)  
 
-[CS19 Brian Doyle Lecture]() 
+[CS19 Brian Doyle Lecture](https://youtu.be/CyrHCJnFqLA) 
 
 <br>
 <br>
