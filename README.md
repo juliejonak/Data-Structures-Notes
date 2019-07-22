@@ -7,6 +7,8 @@ Lecture 3: [BST]()
 
 Lecture 4: [Heaps]()  
 
+[Data Structures in TK](https://learn.lambdaschool.com/cs/sprint/recR4gHcvD21ziR9a)  
+
 <br>
 
 If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved. 

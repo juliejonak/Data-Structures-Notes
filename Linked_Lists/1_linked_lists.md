@@ -99,6 +99,8 @@ You can also think of LIFO/FILO with your email inbox. Most people work through 
 
 ## Queue
 
+[TK: Queues](https://learn.lambdaschool.com/cs/module/recMcvOrFw5BWUku3)  
+
 > FIFO = First In First Out  
 
 Most stores work with a first in, first served method to ensure that customers are happy and served quickly. Similarly, a bakery wants to sell the older baked good sooner than the brand new ones. First made, first sold. If you add the new ones to the front, then the old ones might go bad (expire).
@@ -107,11 +109,15 @@ If a customer service line handled new inqueries first, the first customers to r
 
 Queues function the same way where they handle the oldest items first.
 
+Learn more about [LIFO v FIFO](https://www.geeksforgeeks.org/fifo-vs-lifo-approach-in-programming/).  
+
 <br>
 <br>
 
 
 ## Linked Lists
+
+[TK: Linked Lists](https://learn.lambdaschool.com/cs/module/rec3MaMAY78iDm7ax)  
 
 Lists are used for remembering things and checking them off in order, like a grocery list.
 
