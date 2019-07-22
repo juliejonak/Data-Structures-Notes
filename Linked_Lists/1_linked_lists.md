@@ -7,6 +7,15 @@ e. [](#)
 f. [](#)  
 g. [](#)  
 
+<br>
+
+[CS18 Sean Chen Lecture](https://youtu.be/wjeheracQ6U)  
+
+[CS19 Brian Doyle Lecture]() 
+
+<br>
+<br>
+
 ## Additional Resources
 
 [Pre-Class: The Queue Data Structure](https://youtu.be/j-fBJpSQ19g)  
@@ -17,30 +26,153 @@ g. [](#)
 <br>
 <br>
 
-* Why study Data Structures?
-* An overview of Stacks & Queues
-* What are Linked Lists? How do we implement them in Python?
+
+## Arrays
+
+What is an array and how do they work?  
+
+- They have a fixed length/size  
+- A sequence of contiguous objects of the same type, storing data  
+- Index based with a value  
+- Time and Space efficient  
+- Fast at inserting to the end, slow at inserting to the beginning (because all objects in the array are shifted one space to the right if there is available space OR a new copy of the array is made if there is no available space) 
+
+<br>
+
+> 01 01 was a race horse  
+> 10 10 was one too  
+> 01 01 won one race  
+> 10 10 01 01 10  
+
+<br>
+An array allocates a certain amount of memory when they are created.  
+
+Array lookup begins at `[0]` because it's zero pointer sizes away from the pointer at the beginning of the sequence. While it's harder for people, it's easier for computers to do the math.   
+
+> Index * size of type = array[index]  
+
+So, 0 * 4 bits = 0. If we started with 1 instead of 0, that would require an additional operation to find the starting point beause 1 * 4 = 4, not 0.  
+
+array[5] would point to the 20th bit because 5 * 4 = 20.  
+
+If we know that we want an array of 3, 12 bits of memory will be set aside for this array (3 * 4 = 12).  
+
+If we want to decrease the size of that array, we can easily indicate that the memory for that array is _less_ than 12 bits.  
+
+But if we want to _add_ to the array, we have to first check _if_ the memory next to the end of the current array is already allocated.  
+
+<br>
+
+If that memory is not already allocated, we can use it to expand the array. But if it is taken, how do we expand the array?  
+
+Because arrays must be contiguous (unlike linked lists), we can't just allocate the next closest available bits of memory.
+
+Depending on if the language manages memory for us (like Python), we may have to do this manually.  
+
+We first would need to find a larger memory block that fits the new array length, then copy the original array data into that new memory block. Afterwards, we release the original block of memory by marking it as free (or able to be collected by the garbage collector).  
+
+<br>
+
+Typically that data is not actually cleared. It's just marked as free to re-use. When we get rid of old hard drives or other memory storage devices, it's best to fully destroy anything that contained sensitive data because it may still be written to memory if it was not memory that was cleared to re-use. De-allocation is not the same as erasing, despite being "deleted" according to the computer.  
+
+Not all languages de-allocate automatically. In Python it does, but in C, you have to do it manually (or risk a memory leak).  
+
+<br>
+<br>
+
+## LIFO/FILO
+
+> LIFO = Last In First Out  
+> FILO = First In Last Out  
+
+We can think of stacks like vertical stacks of paper on a desk. We add to the top of the stack, placing newer papers on top. As we process through the papers, we're dealing with the newer papers first, instead of the oldest.
+
+You can also think of LIFO/FILO with your email inbox. Most people work through their email inbox from the top down (newest to oldest). Or, a social medai feed. The most recent thing would be considered the most important. 
+
+<br>
+<br>
+
+## Queue
+
+> FIFO = First In First Out  
+
+Most stores work with a first in, first served method to ensure that customers are happy and served quickly. Similarly, a bakery wants to sell the older baked good sooner than the brand new ones. First made, first sold. If you add the new ones to the front, then the old ones might go bad (expire).
+
+If a customer service line handled new inqueries first, the first customers to reach out would become very angry. Or a playlist usually lists the oldest song put onto the playlist first.
+
+Queues function the same way where they handle the oldest items first.
+
+<br>
+<br>
+
 
 ## Linked Lists
 
-[CS18 Sean Chen Lecture](https://youtu.be/wjeheracQ6U)  
+Lists are used for remembering things and checking them off in order, like a grocery list.
 
 Linked Lists and Arrays are very similar - both are used for storing lists of data. Arrays are usually included as part of any language's library but linked lists are not necessarily (JS and Python do not export a standard linked list implementation), so we are more familiar with arrays. We see them commonly.
 
-With arrays, the information stored within them are all physicaly stored next to each other in memory.
+With arrays, the information stored within them are all physically stored next to each other in memory.
 
 A linked list might be better represented as a bead necklace - little nodes connected by a link (beads by string). There is no requirement that this data exist next to each other in memory. Instead, each item in the list points to the next item's location in memory.
 
 ![Arrays v Linked Lists](Array_LList.png "Arrays v Linked Lists")
 
+Arrays _have_ to be contiguous because they are data stored next to each other in memory. In the bits, the allocated memory must always have a value -- it isn't null in memory. It's either a 0 or a 1. No matter if we aren't storing a value, a 0 is still being read. That position in memory is always being read, so even if it's "empty", it'll be _read_ as nothing. (That memory is either still reserved for the array or marked as not in use, but probably contains unused data.)
 
-What are the advantages of each data structure?
+Linked Lists are _not_ contiguous. The parts can exist in separate blocks of memory, pointing from one to the next.
+
+If we have a grocery list like so:
+
+<br>
+
+> Milk  
+> Ground Beef  
+> Cheese  
+> Taco Shells  
+> Lettuce  
+> Eggs  
+> Salsa  
+
+<br>
+
+We could go down the list and get each item in order. But navigating a grocery store makes more sense if we move through section by section. If we start with Milk, we're near the dairy. It would make the most sense to get cheese and eggs before getting the other items.
+
+If we then added in Hot Sauce, we know that it's probably by Taco Shells, so rather than adding it to the end of the list, we would want to add it before or after Taco Shells to organize it better.
+
+With a linked list, each item points to the next item. If we re-wrote our list like a linked list, it would look more like this:
+
+<br>
+
+> Milk  
+> Cheese  
+> Eggs  
+> Ground Beef  
+> Taco Shells  
+> Hot Sauce  
+> Salsa  
+> Lettuce  
+
+<br>
+
+In a linked list, each item is a Node with a pointer to the next item. Milk would point to Cheese. Salsa would point to Lettuce.
+
+When we add Hot Sauce in, previously, Taco Shells pointed to Salsa. In order to add an item, we would find an open space in memory, create a new node called Hot Sauce. Hot Sauce would point to Salsa. Then we would change Taco Shells to point to Hot Sauce.
+
+In this way, updating items in a Linked List is more time and space efficient than with an array, because we aren't having to find a new contiguous space of memory and copy an old array; or shift all items in the array over one.
+
+With the Linked List, we add a new node and update the previous node's pointer. It's quick and easy.
+
+<br>
+<br>
+
+## What are the advantages of each data structure?
 
 If our memory is already being used up by other applications - there are available spots but not that many. If we use an array, we need that specific size of continuous space for that array. A linked list is more memory flexible by using the available spaces.
 
 That said, this con of linked lists is more conceptual than applicable. Typically, arrays are still considered to be more memory efficient and this would not be a factor in choosing a linked list over an array.
 
-##### A good reason to decide which one to use is considering the run time of removing or inserting an item from the linked list v array.
+> A good reason to decide which one to use is considering the run time of removing or inserting an item from the linked list v array.  
 
 If we wanted to remove the first item in an array, there would be a hole in the first spot of the array. Arrays are unhappy if the hole is anywhere other than the end of the array - so the remaining elements are shifted one to the left. The runtime of that change is O(n). A very large array would have a significant shift run time. 
 
@@ -48,7 +180,7 @@ Removing any elements from the front or middle of an array is a linear operation
 
 If we wanted to insert a new element to the start (or middle) or an array, we have to shift the other elements to the right to make room for a new item to be added into the continuous array space in memory.
 
-Again, insert (other than to the end of an array) has a linear run time O(n).
+Again, insert (other than to the end of an array) has a linear run time `O(n)`.
 
 Arrays are only efficient when adding/removing from the end.
 

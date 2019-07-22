@@ -21,3 +21,15 @@ Just because something _can_ get the job done, doesn't mean it will do it effici
 Some types have more use cases than others, even if they are rarer in real life implementation (heaps v arrays and hash tables).
 
 In interviews, it's common to be asked about more niche implementations of data structures or accurately choosing the most efficient data structure to solve an algorithm. 
+
+<br>
+
+# What is a data structure?
+
+An optimized way of storing data sets. 
+
+Outside of programming, we use storage structures like cabinets and drawers. Some are more appropriate for certain types of items versus others. While a cabinet is great for plates or glasses, it might not be great for storing piles of papers.
+
+We also use data storage in lists like for grocery shopping or recipes, or a calendar for associating items with days of the week.
+
+In the same way, we need to know how data structures work to understand what the best implementation for solving problems is based on the anticipated data. Developers are problem solvers who often solves things that have not been done before or don't have a simple online tutorial for.
