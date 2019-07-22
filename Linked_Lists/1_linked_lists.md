@@ -1,11 +1,14 @@
-#Lecture 1: Linked Lists  
+# Lecture 1: Linked Lists  
+
 a. [Additional Resources](#Additional-Resources)  
-b. [](#)  
-c. [](#)  
-d. [](#)  
-e. [](#)  
-f. [](#)  
-g. [](#)  
+b. [Arrays](#Arrays)  
+c. [LIFO/FILO](#LIFO/FILO)  
+d. [Queue](#Queue)  
+e. [Linked Lists](#Linked-Lists)  
+f. [What are the advantages?](#What-are-the-advantages-of-each-data-structure?)  
+g. [Implementing Linked Lists](#Implementing-Linked-Lists)  
+h. [Edge Cases](#Edge-Cases)  
+i. [Iterating Through a Linked List](#Iterating-Through-a-Linked-List)  
 
 <br>
 
@@ -470,3 +473,8 @@ When it checks Node 1, and 1 != 3, `Current` become Node 2. It continues to iter
 
 If we were looking for 5, this would iterate through the entire linked list until the final Node is `None` (end of the list) and no target matched, so it returns `False`.
 
+
+<br>
+<br>
+
+If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved. 

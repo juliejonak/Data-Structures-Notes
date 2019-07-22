@@ -8,6 +8,10 @@ Lecture 3: [BST]()
 Lecture 4: [Heaps]()  
 
 <br>
+
+If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved. 
+
+<br>
 <br>
 
 # Data Structures
