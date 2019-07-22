@@ -77,6 +77,8 @@ Typically that data is not actually cleared. It's just marked as free to re-use.
 
 Not all languages de-allocate automatically. In Python it does, but in C, you have to do it manually (or risk a memory leak).  
 
+For more in-depth information about how arrays work, [read here](https://github.com/juliejonak/Hash-Tables-Notes#Arrays).  
+
 <br>
 <br>
 
@@ -174,7 +176,7 @@ That said, this con of linked lists is more conceptual than applicable. Typicall
 
 > A good reason to decide which one to use is considering the run time of removing or inserting an item from the linked list v array.  
 
-If we wanted to remove the first item in an array, there would be a hole in the first spot of the array. Arrays are unhappy if the hole is anywhere other than the end of the array - so the remaining elements are shifted one to the left. The runtime of that change is O(n). A very large array would have a significant shift run time. 
+If we wanted to remove the first item in an array, there would be a hole in the first spot of the array. Arrays are unhappy if the hole is anywhere other than the end of the array - so the remaining elements are shifted one to the left. The runtime of that change is `O(n)`. A very large array would have a significant shift run time. 
 
 Removing any elements from the front or middle of an array is a linear operation in the worst case (the exception is removing from the end).
 
@@ -200,15 +202,18 @@ Nothing is shifted. The pointers to the next item in the list are simply being m
 
 If we wanted to add a new element into the middle of the list, we would simply add a new node, that holds a reference to the previous and next node in the list. Nothing is being shifted, just the pointers are being re-drawn.
 
-No matter how big the linked list is, the run time is constant O(1).
+No matter how big the linked list is, the run time is constant `O(1)`.
 
 Adding or removing from the end of the linked list retains the same run time as an array too - so it's more efficient overall and equally efficient to the array's best case scenario.
 
-
+<br>
+<br>
 
 ## Implementing Linked Lists
 
-Typically with linked list implementations, there's a node class and a linked list class (which builds on top of the node class).
+Typically with linked list implementations, there's a node class and a linked list class (which builds on top of the node class). Let's start building one in our [linked list python file](linked_list.py).  
+
+<br>
 
 ```
 class Node:
@@ -218,7 +223,12 @@ class Node:
 
 ```
 
+<br>
+
+
 Our Node class starts with a value that defaults to none and a next_node that also defaults to None. We'll also add some methods:
+
+<br>
 
 ```
 class Node:
@@ -239,9 +249,14 @@ class Node:
         self.value = value
 ```
 
+<br>
+
+
 This gives our Node some methods that will return the current value, the pointer to the next node and allows us to re-assign the next node pointer.
 
 Our LinkedList needs a Head Reference and Tail Reference - those are the only reference a linked list contains, which is an important difference to arrays. Every item in an array is indexed, allowing us to access any element within the array via bracket notation. Linked Lists do not work the same way.
+
+<br>
 
 To traverse a linked list, you have to start at the head node and keep moving the reference through the list, until you find the wanted item. We can't just request and access x item in the list (second or fifth).
 
@@ -249,6 +264,8 @@ This is one of the major reasons arrays are more commonly used because indexing 
 
 We'll also adds a method to add a tail to the end of our linked list. Thinking about the way that adding a new item to the linked list is by creating a new node, the re-write the previous next_node reference to the new node, and then re-write the Tail Reference to this new node.
 
+
+<br>
 
 ```
 class LinkedList:
@@ -266,7 +283,12 @@ class LinkedList:
 
 ```
 
+<br>
+
+
 Does the order of those last two operations matter? Why would this work (or not)?
+
+<br>
 
 ```
     def add_to_tail(self, value):
@@ -278,17 +300,22 @@ Does the order of those last two operations matter? Why would this work (or not)
         self.tail.set_next(new_node)
 ```
 
+<br>
+
+
 If, instead, we made the new node and then moved the Tail Reference to the end prior to setting self.tail.set_next() would mean that it would just be the new node referencing itself, instead of the _previous_ node referencing the new node as the tail.
 
 Order matters for this.
 
+<br>
+<br>
 
 
 ##### Edge Cases
 
 What are some assumptions we're making currently that don't account for possible edge cases?
 
-- The list was not empty, elements already existed
+> The list was not empty, elements already existed  
 
 What does an empty Linked List look like?
 
@@ -297,6 +324,9 @@ It just has head and tail references that are both "none".
 If we add a new node, it will be the only node in the linked list and will be referenced to as both the head and the tail.
 
 To adjust our constructor for handling this, we can keep our current setup but we need to also set the head:
+
+<br>
+
 
 ```
         # check if we're in an empty list state
@@ -309,7 +339,12 @@ To adjust our constructor for handling this, we can keep our current setup but w
             self.tail = new_node
 ```
 
+<br>
+
+
 Now our Linked List class will look like this with the If/Else setup handling this edge case:
+
+<br>
 
 ```
 class LinkedList:
@@ -330,7 +365,12 @@ class LinkedList:
 
 ```
 
+<br>
+
+
 Now let's add a remove head method. We need to take the old_head's value, and update it to the next_node, then remove that node.
+
+<br>
 
 ```
         def remove_head(self):
@@ -342,30 +382,33 @@ Now let's add a remove head method. We need to take the old_head's value, and up
             return old_head.get_value()
 ```
 
+<br>
+
+
 A double linked list would imply that the flow of pointers goes in both directions. Currently, they only go one way, with each node pointing to the next one, but not the previous one.
 
-```
-H -> x -> x -> x -> T
-```
+> H -> x -> x -> x -> T  
 
 A linked list where the nodes point to both the previous _and_ next node, then that is a doubly linked list, like so:
 
-```
-H <-> x <-> x <-> x <-> T
-```
+> H <-> x <-> x <-> x <-> T  
 
 Hash Tables and Caches are times where linked lists might be preferred over arrays...but that comes later.
 
-- What if our list is empty? We need to return non to show we can't remove the head.
+> What if our list is empty? We need to return non to show we can't remove the head.  
 
-We'll check and return None if that is the case.
+We'll check and return `None` if that is the case.
 
 
-- What if our list has only one Node?
+> What if our list has only one Node?  
 
-Then the self.head will equal self.tail, because the head reference and tail reference will be to the same node.
+Then the `self.head` will equal s`elf.tail`, because the head reference and tail reference will be to the same node.
 
 We'll set our reference to the old_head and then update the current head and tail to None, since removing this single Node would mean there is no node left (empty list)
+
+
+<br>
+
 
 ```
             # what if our list is empty?
@@ -379,11 +422,17 @@ We'll set our reference to the old_head and then update the current head and tai
                 return old_head.get_value()
 ```
 
+<br>
+<br>
 
+## Iterating Through a Linked List
 
-#### How can we iterate through a linked list, looking for a target value?
+How can we iterate through a linked list, looking for a target value?
 
 First, let's check if our list is empty. There's no reason to search through our list if it contains nothing.
+
+<br>
+
 
 ```
     def contains(self, target):
@@ -404,11 +453,12 @@ First, let's check if our list is empty. There's no reason to search through our
         return False
 ```
 
+<br>
+
+
 If our list is like this:
 
-```
-1 --> 2 --> 3 --> 4 --> N
-```
+> 1 --> 2 --> 3 --> 4 --> N  
 
 We have to start at the head because with a single Linked List, we can only traverse it in one direction.
 
@@ -416,7 +466,7 @@ Does this linked list contain 3?
 
 We keep looping so long as there is a Node to check against the Target (3).
 
-When it checks Node 1, and 1 != 3, Current become Node 2. It continues to iterate through until it hits Node 3 and return True because 3 == 3.
+When it checks Node 1, and 1 != 3, `Current` become Node 2. It continues to iterate through until it hits Node 3 and returns `True` because 3 == 3.
 
-If we were looking for 5, this would iterate through the entire linked list until the final Node is None (end of the list) and no target matched, so it returns False.
+If we were looking for 5, this would iterate through the entire linked list until the final Node is `None` (end of the list) and no target matched, so it returns `False`.
 
