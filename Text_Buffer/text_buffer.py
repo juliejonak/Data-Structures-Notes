@@ -191,7 +191,5 @@ ll.add_to_tail(11) # should be 5,2,9,11
 ll.add_to_tail(13) # should be 5,2,9,11,13
 ll.remove_from_tail() # should be 5,2,9,11
 
-ll.move_to_head(2) # should be 2,5,9,11
-ll.move_to_tail(5) # should be 2,9,11,5
-
 ll.get_max() # should return 11
+print(f"ll: {ll}") # return length 4, head: 5, tail: 11
