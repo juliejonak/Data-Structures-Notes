@@ -39,7 +39,7 @@ The benefit of nodes is that it allows us to dynamically utilize memory.
 
 A doubly linked list has pointers to both the next and previous node (hence, doubly linked).
 
-In our [project repo]() there is a doubly linked list file (copied into [this file](text_buffer.py)). It has this code setting up listNode instances:
+In our [project repo](https://github.com/LambdaSchool/data-structures) there is a doubly linked list file (copied into [this file](dll.py)). It has this code setting up listNode instances:
 
 <br>
 
