@@ -12,7 +12,7 @@ g. [Get Max](#Get-Max)
 
 [CS18 Sean Chen Lecture](https://youtu.be/l5jfEmBnAqg)  
 
-[CS19 Brian Doyle Lecture]() 
+[CS19 Brian Doyle Lecture](https://youtu.be/YV8H5vevKGU)   
 
 <br>
 <br>
