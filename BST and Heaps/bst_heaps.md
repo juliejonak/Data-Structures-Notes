@@ -293,8 +293,146 @@ if isinstance(other_buffer, TextBuffer):
 
 <br>
 
+We should also check that the `other_buffer` being passed in does in fact have contents. 
+
+<br>
+
+```
+if(other_buffer.contents.length == 0):
+    print("ERROR: Other buffer is empty!")
+    return        
+```
+
+<br>
+
+We have to nest that in _after_ checking that `other_buffer` is a buffer, or else there will be no `.length` to check.
 
 
-[Paused at 26:36](https://www.youtube.com/watch?v=B4ijhReCRHw&feature=youtu.be)
+Lastly we need to handle joining a string by turning it into text buffer first.
+
+This function starts out like so:
+
+<br>
+
+```
+# if we get fed a string instead of a text buffer instance,
+# initialize a new text buffer with this string and then 
+# call the join method 
+
+def join_string(self, string_to_join):
+    pass
+```
+
+<br>
+
+
+This can be done very simply with our pre-written functions. We'll turn that string into a TextBuffer instance and then use our join method to combine the new text buffer with the current one.
+
+<br>
+
+```
+def join_string(self, string_to_join):
+    new_buffer = TextBuffer(string_to_join)
+    self.join(new_buffer)
+```
+
+<br>
+<br>
+
+## Binary Search Trees
+
+What is a Binary Search?
+
+It takes a sorted list and compares two pieces of data, then cuts the list in half based on what it is searching for. This results in an `O(log n)` run time, which is very good.
+
+To use this, it means our data must be sorted first. One way to do that is using a tree.
+
+<br>
+
+Read more [here](https://www.geeksforgeeks.org/binary-search/) or see this helpful [short video visualization](https://www.youtube.com/watch?v=qBGLYzFF1aQ).
+
+[This video](https://www.youtube.com/watch?v=Re-HdpXo1is) is a brief explanation of iterative searching through a binary tree.
+
+<br>
+
+A tree is a node tree that contains "branches" and "leaves". 
+
+![Valid Binary Trees](Binary_Trees.pny "Valid Binary Trees")
+
+A valid binary tree requires that all the nodes have only 0, 1 or 2 children -- not more.
+
+It also means that all the _left_ children have values _less than_ their parents, while all _right_ children have values _greater than_ their parents.
+
+In this manner, the tree is pre-sorted.
+
+<br>
+
+Looking at the chart above, we can see in `a)` that 1's child on the left is 25, which is greater than, so that is an invalid binary tree.
+
+`b)` only contains one node, so it's valid.
+
+`c)` is also an invalid search tree. 22 is valid because 5 is on the right and 54 is on the left. 5 looks valid because 77 is on the right side of 5...but because it's larger than 22, it should be on 22's right side.
+
+By having 77 and 92 underneath 22 on the left side of the tree, it's invalid because it's not properly sorted.
+
+`d)` is also invalid because 21 is larger than 17 but on the left side.
+
+
+<br>
+
+What would we do if we have 2 identical values in the Binary Tree? 
+
+In a simple BST, we could place that either on the left or right hand side, depending on how we want to define which is _equal to and_. 
+
+But in an ideal solution, we would not have duplicates. Instead, we would store the value _and_ the count of nodes with that value in one spot.
+
+For example, if we had two 12's, instead of listing:
+
+```
+        12
+      /    \
+     12    45
+    /
+   6
+```
+
+We might list like this instead:
+
+```
+    12 (2)
+    /    \
+   6     45
+```
+
+This indicates that we have two nodes with the value of 12, but prevents any confusion in our sorted tree by having duplicate values in the branches.
+
+A detailed explanation is [here](https://www.geeksforgeeks.org/how-to-handle-duplicates-in-binary-search-tree/).
+
+Some Binary Search Trees also require it to be balanced by having the same number of nodes on the right and left sides. Learn more about [converting to a balanced BST](https://www.geeksforgeeks.org/convert-normal-bst-balanced-bst/). 
+
+<br>
+
+
+A Binary Tree _could_ work if we swapped convention and put all greater than values down the left side, and lesser than values on the right side. It would still funciton. But because it breaks convention, it would be poorly written code that confuses other devs that work with that code.
+
+There could be an exception with good reasoning for doing it that way -- in which case, we should document it clearly. 
+
+On the whole though, it's best to follow convention.
+
+<br>
+
+Visualize your Binary Tree by creating it [on this website](https://www.cs.usfca.edu/~galles/visualization/BST.html) or also [this one](http://btv.melezinek.cz/binary-search-tree.html).
+
+See visualization of many BST aspects [here](https://visualgo.net/bn/bst).
+
+<br>
+
+Paused at 53:01: https://www.youtube.com/watch?v=B4ijhReCRHw&feature=youtu.be
+
+
+
+
+
+
 
 
