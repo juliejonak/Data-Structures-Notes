@@ -5,7 +5,9 @@ Lecture 2: [Implementing a Doubly Linked List](Doubly_Linked_List/2_doubly_linke
 
 Lecture 3: [BST and Heaps](BST_and_Heaps/bst_heaps.md)   
 
-Lecture 4: [Heaps]()  
+Lecture 4: [Heaps & Interview Practice](Interview_Problems/Heaps_and_Interview.md) 
+
+<br>
 
 [Data Structures in TK](https://learn.lambdaschool.com/cs/sprint/recR4gHcvD21ziR9a)  
 
