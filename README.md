@@ -3,7 +3,7 @@ Lecture 1: [Linked Lists](Linked_Lists/1_linked_lists.md)
 
 Lecture 2: [Implementing a Doubly Linked List](Doubly_Linked_List/2_doubly_linked_list.md)  
 
-Lecture 3: [BST]() 
+Lecture 3: [BST and Heaps](BST_and_Heaps/bst_heaps.md)   
 
 Lecture 4: [Heaps]()  
 
