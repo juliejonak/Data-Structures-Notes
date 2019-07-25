@@ -1,29 +1,19 @@
-# Lecture IV: 
+# Lecture IV: Heaps and Interview Questions
 
-a. [](#)  
-b. [](#)   
-c. [](#)   
-d. [](#)   
-e. [](#)   
-f. [](#)   
-g. [](#)   
-h. [](#)   
-i. [](#)   
-j. [](#)   
-k. [](#)   
-l. [](#)   
-m. [](#)   
-n. [](#)      
+a. [Binary Search Tree Solution](#Binary-Search-Tree)  
+b. [Review Heaps](#Review-Heaps)   
+c. [Practice Interview Questions](#Practice-Interview-Questions)     
 
 <br>
 
 [Add on that gives VSCode windows unique color themes](https://marketplace.visualstudio.com/items?itemName=stuart.unique-window-colors)
 
 <br>
+<br>
 
 ## Binary Search Tree
 
-Going through our BST project, we currently have the following code and need to work on `contains`:
+Going through our BST project, [we currently have the following code](https://github.com/LambdaSchool/Data-Structures/blob/master/binary_search_tree/binary_search_tree.py) and need to work on `contains`:
 
 <br>
 
@@ -108,7 +98,7 @@ We are checking if there is a node to the right. If there isn't, then we know th
 
 Otherwise, we keep searching down the right by calling get_max on the next right node.
 
-Our last function to get is the `for_each` method which should visit each node in the tree and run a callback function on it.
+Our last function to write is the `for_each` method which should visit each node in the tree and run a callback function on it.
 
 We can continue writing this with recursion. 
 
@@ -157,6 +147,8 @@ In the array, the new node is being added to the end of the array, then it's fin
 
 
 _Brian goes into depth about this around 40 minutes into the CS19 lecture._
+
+<br>
 
 Q: Why it is advantageous to replace the lowest leaf when popping off the root and then sift that child down. Why not swap the next largest child of that root after removing the root?
 
@@ -221,6 +213,8 @@ In an array like this:
 > [0, 1, 2, 3, 5, 6, 9]
 
 We know that the earliest missing is at arr[4] because arr[4] == 5 not 4. 
+
+<br>
 
 
 Our next problem is...
@@ -287,7 +281,7 @@ Another interesting solution might be to iterate through the arrays while there 
 
 Like so:
 
-!(Solution)[Interview2.png "Solution"]
+![Solution](Interview2.png "Solution")
 
 <br>
 
