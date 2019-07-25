@@ -38,7 +38,42 @@ class BinarySearchTree:
             return self.right.contains(target)
 
   def get_max(self):
-    pass
+    if not self:
+        return None
+    if not self.right:
+        return self.value
+    else:
+        return self.right.get_max()
+    
 
   def for_each(self, cb):
+    cb(self.value)
+
+    if self.left:
+        self.left.for_each(cb)
+    if self.right:
+        self.right.for_each(cb)
+
+
+class Heap:
+  def __init__(self, comparator):
+    self.storage = []
+    self.comparator = comparator
+
+  def insert(self, value):
+    pass
+
+  def delete(self):
+    pass
+
+  def get_priority(self):
+    pass
+
+  def get_size(self):
+    pass
+
+  def _bubble_up(self, index):
+    pass
+
+  def _sift_down(self, index):
     pass
