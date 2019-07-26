@@ -2,18 +2,12 @@
 
 a. [Additional Resources](#Additional-Resources)  
 b. [Text Buffer](#Text-Buffer)   
-c. [](#)   
-d. [](#)   
-e. [](#)   
-f. [](#)   
-g. [](#)   
-h. [](#)   
-i. [](#)   
-j. [](#)   
-k. [](#)   
-l. [](#)   
-m. [](#)   
-n. [](#)      
+c. [Append and Prepend](#Append-and-Prepend)   
+d. [Delete From Head or Tail](#Delete-From-Head-or-Tail)   
+e. [Binary Search Trees](#Binary-Search-Trees)   
+f. [Insert into BST](#Insert-into-BST)   
+g. [Heaps](#Heaps)   
+h. [Building a Heap](#Building-a-Heap)        
 
 <br>
 
@@ -427,12 +421,241 @@ See visualization of many BST aspects [here](https://visualgo.net/bn/bst).
 
 <br>
 
-Paused at 53:01: https://www.youtube.com/watch?v=B4ijhReCRHw&feature=youtu.be
+
+## Insert into BST
+
+Let's start writing out a class that initializes a Binary Search Tree by creating nodes of the tree. We might initialize it like so:
+
+<br>
+
+```
+class BinarySearchTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+```
+
+<br>
+
+This initializes a parent node with some passes in value, that currently has no children. So we need to write a method that allows us to insert a value into the tree, that will place it into the correct spot, following the left-right less-than and greater-than rules.
+
+<br>
+
+```
+class BinarySearchTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+    
+    def insert(self, value):
+        if value < self.value:
+            # go down the left side
+            if not self.left:
+                # if there is no more left values, place it there
+                self.left = BinarySearchTreeNode(value)
+            else:
+                # continue searching down the left to find an open spot
+                self.left.insert(value)
+        else:
+            # go down the right side
+            if not self.right:
+                # place the value node here
+                self.right = BinarySearchTreeNode(value)
+            else:
+                # continue searching
+                self.right.insert(value)
+```
+
+<br>
+<br>
+
+## Heaps
+
+What is a heap?
+
+It's a tree that is held inside of an array. Unlike the typical array that is arranged by increasing index, a heap is an array that is arranged according to parent-child relationships.
+
+Read more [here](https://www.geeksforgeeks.org/binary-heap/).
 
 
+There are two types of heaps: [min heap and max heap](https://www.educative.io/edpresso/min-heap-vs-max-heap).
+
+A min heap means that the key value at the root of the tree must be the minimum of all the values in the Binary Heap.
+
+A max heaps means that the key value at the root of the tree must be the _maximum_ value of the complete binary tree.
 
 
+If we have two numbers, 42 and 10, how would it look in a tree?
+
+It'll start out with 42:
+
+> [ -inf, 42]  
+
+Which in the tree is just:
+
+```
+    42
+```
+
+When we add 10, it will be added in at the bottom of the tree:
+
+> [ -inf, 42, 10 ]  
+
+```
+    42
+   /
+  10
+```
+
+BUT then it adjusts by switching 10 to the appropriate place in the tree for a min heap (remember, the key value at the root is the lowest).
+
+> [ -inf, 10, 42 ]  
+
+```
+    10
+   /
+  42     
+```
+
+<br>
+
+This shows that adding to a min heap is a multi-step process that initially adds the new value as a node to the bottom of the tree. Then it "bubbles up" or sorts itself into place by moving up a generation each time.
+
+We can think of this as the parent must be smaller than the child.
+
+Unlike a BST, where nodes can be added at random, in a heap, the nodes are filled up in a sequential order, by filling the left most, lowest spot first and moving to the right, until an entire generational level is filled. (But then swapping nodes until each value is in the right location)
+
+Visualize it like this sequence:
+
+```
+        10
+       /  \
+      ?    ?
+     / \  / \
+    ?  ? ?   ?
+```
+
+```
+        10
+       /  \
+      11   ?
+     / \  / \
+    ?  ? ?   ?
+```
+
+```
+        10
+       /  \
+      11  25
+     / \  / \
+    ?  ? ?   ?
+```
+
+```
+        10
+       /  \
+      11  25
+     / \  / \
+   32  ? ?   ?
+```
+
+```
+        10
+       /  \
+      11  25
+     / \  / \
+   32  45 ?   ?
+```
+
+```
+        10
+       /  \
+      11  25
+     / \  / \
+   32 45 63   ?
+```
+
+```
+        10
+       /  \
+      11  25
+     / \  / \
+   32 45 63  77
+```
+
+<br>
+
+Notice how the open spots filled from left to right, row by row.
+
+Then the parent and child swap if the parent is larger than the child.
+
+In a max heap, the larger numbers float to the top instead of the smaller.
+
+<br>
+
+What would this data structure be useful for?
+
+This could help us sort prices from low to high, or for a priority queue on a server by assigning weights to different types of messages.
+
+<br>
+<br>
+
+## Building a Heap
+
+Let's try to work with the heap file in our project repo, generic heap.
+
+It's initialized like so:
+
+<br>
+
+```
+class Heap:
+  def __init__(self, comparator):
+    self.storage = []
+    self.comparator = comparator
+```
+
+<br>
+
+Let's build the bubble up method and assume this is a min heap. We have the _index_ though, not the value of the index.
+
+If we're looking at the index, when do we know we've hit our base case? If our index is 0.
+
+How do we compare this index to the parent's value? Although we're mentally envisioning this as a binary tree, it's actually stored as a flat array. 
+
+We'll use [the algorithm](https://www.geeksforgeeks.org/binary-heap/) that returns the parent node: i-1//2
+
+The `//` divisor means that it drops any decimal points and returns a floored number (whole integer).
+
+<br>
+
+```
+  def _bubble_up(self, index):
+    # until we hit the base case
+    while index > 0:
+        # compare to parent
+        parent = (index-1) // 2 #divided by 2
+
+        # if the parent is greater than...
+        if self.storage[index] < self.storage[parent]:
+            # swap them
+            self.storage[index], self.storage[parent] = self.storage[parent], self.storage[index]
+            index = parent
+        else:
+            # leave it where it is
+            break
+```
+
+<br>
+
+This compares the parent value to the index value. If the parent is larger, then we'll swap them, and update the index to that value of the parent.
+
+If the parent value is not larger, then we can break out of the loop because the index is in the right place.
 
 
+_Note: the ReadMe actually indicates that the generic heap should be able to be a max or min heap_
 
-
+<br>
+<br>

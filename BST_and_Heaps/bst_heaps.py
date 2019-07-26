@@ -92,3 +92,65 @@ if __name__ == '__main__':
 
     text.delete_front(4)
     print(text)
+
+
+
+class BinarySearchTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+    
+    def insert(self, value):
+        if value < self.value:
+            # go down the left side
+            if not self.left:
+                # if there is no more left values, place it there
+                self.left = BinarySearchTreeNode(value)
+            else:
+                # continue searching down the left to find an open spot
+                self.left.insert(value)
+        else:
+            # go down the right side
+            if not self.right:
+                # place the value node here
+                self.right = BinarySearchTreeNode(value)
+            else:
+                # continue searching
+                self.right.insert(value)
+
+
+class Heap:
+  def __init__(self, comparator):
+    self.storage = []
+    self.comparator = comparator
+
+  def insert(self, value):
+    pass
+
+  def delete(self):
+    pass
+
+  def get_priority(self):
+    pass
+
+  def get_size(self):
+    pass
+
+  def _bubble_up(self, index):
+    # until we hit the base case
+    while index > 0:
+        # compare to parent
+        parent = (index-1) // 2 #divided by 2
+
+        # if the parent is greater than...
+        if self.storage[index] < self.storage[parent]:
+            # swap them
+            self.storage[index], self.storage[parent] = self.storage[parent], self.storage[index]
+            index = parent
+        else:
+            # leave it where it is
+            break
+
+  def _sift_down(self, index):
+    pass

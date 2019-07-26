@@ -6,6 +6,8 @@ c. [Practice Interview Questions](#Practice-Interview-Questions)
 
 <br>
 
+[CS19 Lecture with Brian Doyle](https://youtu.be/qtB7wpLG84c)  
+
 [Add on that gives VSCode windows unique color themes](https://marketplace.visualstudio.com/items?itemName=stuart.unique-window-colors)
 
 <br>
